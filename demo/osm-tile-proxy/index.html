@@ -1,1 +1,117 @@
-proxy demo
+<html>
+<head>
+<script src="https://cdn.augmentedlogic.com/vendor/openlayers-2.13.1/api/OpenLayers.js"></script>
+<script src="https://cdn.augmentedlogic.com/vendor/openlayers-2.13.1/api/overwrite.js"></script>
+<script src="https://cdn.augmentedlogic.com/vendor/jquery/jquery-3.5.1.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.augmentedlogic.com/fonts/xz/fira-sans.css" />
+<link rel="stylesheet" href="https://cdn.augmentedlogic.com/fonts/xz/roboto.css" />
+<link rel="stylesheet" href="https://cdn.augmentedlogic.com/fonts/xz/inter.css" />
+<link rel="stylesheet" href="https://cdn.augmentedlogic.com/fonts/xz/fira-code.css" />
+
+<link rel="stylesheet" href="https://cdn.augmentedlogic.com/vendor/featherlight/featherlight.min.css"  type="text/css"/>
+<script src="https://cdn.augmentedlogic.com/vendor/featherlight/featherlight.min.js"></script>
+
+<link rel="stylesheet" href="style.css?v=1" />
+
+</head>
+
+<body>
+
+<div>
+<ul>
+
+<div class="al-logo-div">
+    <a href="https://augmentedlogic.com" class="al-logo" style="text-decoration: none; border-bottom: 0px;">{A,L}</a>
+</div>
+
+<div class="selectdiv">
+  Map Style
+  <select id="style-selector" autocomplete="off">
+    <option value="nightmode">Night Mode</option>
+    <option value="dark">Dark</option>
+    <option value="neon">Neon</option>
+    <option value="sepia">Sepia-ish</option>
+    <option value="wikigray" selected>WikiGray</option>
+  </select>
+</div>
+
+<div style="display: inline;">
+  <a href="#" data-featherlight="#mylightbox" class="menu-tab">About</a>
+</div>
+</div>
+<!-- hg -->
+
+<div id="basicMap" style="position: absolute; left: 0px; right: 0px; top: 64px; bottom: 0px;" data-view="drawOverview"></div>
+
+
+<div style="display: none">
+   <div id="mylightbox">
+     <h2>About</h2>
+
+     <p>
+     This is a demo of osm-tile-proxy
+     </p>
+
+     <p>
+     <a href="https://developer.augmentedlogic.com">Project Page</a>
+     </p>
+
+     <p>
+     <a href="https://github.com/augmentedlogic/osm-tile-proxy">Github Repo</a>
+     </p>
+
+   </div>
+</div>
+
+<script>
+function drawMap(map_id, stylename)
+{
+
+        var initial_zoom = 6;
+        var win_width = $(window).width();
+        if(win_width >= 1800) {
+            initial_zoom = 6;
+        }
+        var extent = new OpenLayers.Bounds(133400,5905800,2493900,7407700);
+        var options = {};
+        map = new OpenLayers.Map(map_id, options);
+        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+        OpenLayers.Util.onImageLoadErrorColor = "transparent";
+        var mapnik         = new OpenLayers.Layer.OSM("New Layer", ["http://maps-dev.augmentedlogic.com/"+ stylename +"/${z}/${x}/${y}.png"],
+                                                                    { tileOptions: { crossOriginKeyword: null } ,
+                                                                    //attribution: "Map Data: © OpenStreetMap Contributors" ,
+                                                                    numZoomLevels: 18, // minZoomLevel: 6, maxZoomLevel: 19 ,
+                                                                    transitionEffect: "resize" });
+
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+        var position       = new OpenLayers.LonLat(10.682,51.1109).transform( fromProjection, toProjection);
+        var size = new OpenLayers.Size(28,28);
+        var place_offset = new OpenLayers.Pixel(-12, -12);
+        var offset = new OpenLayers.Pixel(-(size.w/2), -12);
+        map.addLayer(mapnik);
+        map.setCenter(position, initial_zoom );
+
+}
+
+jQuery(document).ready(function() {
+     drawMap("basicMap","wikigray");
+
+     $(".switch").on("click", function() {
+        $("#basicMap").html("");
+        drawMap("basicMap", $(this).data("map"));
+     });
+
+     $('#style-selector').on('change', function() {
+        $("#basicMap").html("");
+        drawMap("basicMap",this.value);
+     });
+
+});
+</script>
+
+
+</body>
+</html>
+
