@@ -78,7 +78,7 @@ function drawMap(map_id, stylename)
         map = new OpenLayers.Map(map_id, options);
         OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
         OpenLayers.Util.onImageLoadErrorColor = "transparent";
-        var mapnik         = new OpenLayers.Layer.OSM("New Layer", ["http://maps-dev.augmentedlogic.com/"+ stylename +"/${z}/${x}/${y}.png"],
+        var mapnik         = new OpenLayers.Layer.OSM("New Layer", ["https://maps.augmentedlogic.com/"+ stylename +"/${z}/${x}/${y}.png"],
                                                                     { tileOptions: { crossOriginKeyword: null } ,
                                                                     //attribution: "Map Data: © OpenStreetMap Contributors" ,
                                                                     numZoomLevels: 18, // minZoomLevel: 6, maxZoomLevel: 19 ,
