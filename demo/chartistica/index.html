@@ -1,0 +1,51 @@
+<html>
+
+<style>
+  body { background: #fff; padding: 0px; margin: 0px; text-align: center; font-family: sans-serif;}
+  .wide { max-width: 700px;  margin: 20px; margin: auto;}
+  .narrow { max-width: 200px; margin: 20px; margin: auto;}
+  .dark-bg { background: #222; padding: 20px; width: 99% }
+  .dark-bg h2 { color: #fff; }
+  .top { padding: 10px;}
+</style>
+
+  <script src="https://cdn.augmentedlogic.com/vendor/chartjs/chart-js-2.8.0.js"></script>
+  <script src="https://cdn.augmentedlogic.com/vendor/chartistica/Chartistica-0.1.5.js"></script>
+
+  <div class="top">
+  <h1>Chartistica Test</h1>
+  </div>
+
+  <div class="dark-bg">
+      <h2>On Dark Background</h2>
+      <canvas class="chartistica wide" data-chart="bar" data-url="/testjson/example.json" data-theme="blue"></canvas>
+      <canvas class="chartistica wide" data-chart="stackedbar" data-url="/testjson/example2.json" data-theme="blue"></canvas>
+      <h2>No Legend</h2>
+      <canvas class="chartistica wide" data-chart="bar" data-url="/testjson/example2.json" data-legend="0" data-theme="red"></canvas>
+  </div>
+
+  <div>
+
+      <h2>On Bright Background</h2>
+      <canvas class="chartistica wide" data-chart="bar" data-url="/testjson/example.json" data-theme="blue"></canvas>
+      <canvas class="chartistica wide" data-chart="line" data-url="/testjson/example.json" data-theme="blue"></canvas>
+      <canvas class="chartistica wide" data-chart="filledline" data-url="/testjson/example.json" data-theme="blue"></canvas>
+      <canvas class="chartistica wide" data-chart="steppedline" data-url="/testjson/example.json" data-theme="blue"></canvas>
+      <canvas class="chartistica wide" data-chart="line" data-url="/testjson/example2.json" data-theme="pink"></canvas>
+      <h2>Radar Chart</h2>
+      <canvas class="chartistica wide" data-chart="radar" data-url="/testjson/example.json" data-theme="pink"></canvas>
+
+      <h2>Minimal Charts</h2> 
+      <canvas class="chartistica narrow" data-chart="sparklebar" data-url="/testjson/example.json" data-theme="blue"></canvas>
+      <canvas class="chartistica narrow" data-chart="sparklebar" data-url="/testjson/example.json" data-theme="pink"></canvas>
+      <canvas class="chartistica narrow" data-chart="sparklebar" data-url="/testjson/example2.json" data-theme="blue"></canvas>
+      <canvas class="chartistica narrow" data-chart="filledsparkleline" data-url="/testjson/example.json" data-theme="gray"></canvas>
+
+
+  </div>
+
+  <script>
+   Chartistica.render();
+  </script>
+
+</html>

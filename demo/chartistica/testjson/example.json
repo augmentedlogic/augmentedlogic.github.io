@@ -1,0 +1,27 @@
+{
+    "labels": [
+        "test",
+        "me",
+        "here",
+        "another",
+        "value",
+        "a",
+        "b",
+        "c"
+    ],
+    "datasets": [
+        {
+            "data": [
+                20,
+                50,
+                25,
+                10,
+                60,
+                40,
+                30,
+                45
+            ],
+            "label": "this"
+        }
+    ]
+}
