@@ -27,6 +27,9 @@ select {
  margin-left: 40px;
 }
 
+a {
+  color: darkblue;
+}
 
 option {
   border: 0px;
